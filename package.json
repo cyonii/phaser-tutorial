@@ -1,0 +1,27 @@
+{
+  "name": "phaser-tutorial",
+  "version": "1.0.0",
+  "description": "learning phaser3",
+  "main": "index.js",
+  "author": "CY Kalu <cy23@tutanota.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development",
+    "serve": "npx http-server"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.4",
+    "@babel/preset-env": "^7.14.4",
+    "babel-loader": "^8.2.2",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev": "^1.1.1"
+  },
+  "dependencies": {}
+}
