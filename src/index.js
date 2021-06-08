@@ -5,7 +5,10 @@ function preload() {
   this.load.image('ground', 'assets/platform.png');
   this.load.image('star', 'assets/star.png');
   this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+  this.load.spritesheet('dude', 'assets/dude.png', {
+    frameWidth: 32,
+    frameHeight: 48,
+  });
 }
 
 function create() {
@@ -20,6 +23,10 @@ function create() {
   const player = this.physics.add.sprite(100, 450, 'dude');
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
+
+  this.physics.add.collider(player, platforms);
+
+  cursors = this.input.keyboard.createCursorKeys();
 
   this.anims.create({
     key: 'left',
@@ -42,7 +49,25 @@ function create() {
   });
 }
 
-function update() {}
+function update() {
+  if (cursors.left.isDown) {
+    player.setVelocityX(-160);
+
+    player.anims.play('left', true);
+  } else if (cursors.right.isDown) {
+    player.setVelocityX(160);
+
+    player.anims.play('right', true);
+  } else {
+    player.setVelocityX(0);
+
+    player.anims.play('turn');
+  }
+
+  if (cursors.up.isDown && player.body.touching.down) {
+    player.setVelocityY(-330);
+  }
+}
 
 const config = {
   type: Phaser.AUTO,
@@ -62,4 +87,3 @@ const config = {
   },
 };
 const game = new Phaser.Game(config);
-console.log(window);
