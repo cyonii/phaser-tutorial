@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+const state = {};
+
 function preload() {
   this.load.image('sky', 'assets/sky.png');
   this.load.image('ground', 'assets/platform.png');
@@ -14,19 +16,19 @@ function preload() {
 function create() {
   this.add.image(400, 300, 'sky');
 
-  const platforms = this.physics.add.staticGroup();
+  const platforms = (state.platforms = this.physics.add.staticGroup());
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
   platforms.create(600, 400, 'ground');
   platforms.create(50, 250, 'ground');
   platforms.create(750, 220, 'ground');
 
-  const player = this.physics.add.sprite(100, 450, 'dude');
+  const player = (state.player = this.physics.add.sprite(100, 450, 'dude'));
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
   this.physics.add.collider(player, platforms);
 
-  cursors = this.input.keyboard.createCursorKeys();
+  state.cursors = this.input.keyboard.createCursorKeys();
 
   this.anims.create({
     key: 'left',
@@ -50,6 +52,8 @@ function create() {
 }
 
 function update() {
+  const { cursors, player } = state;
+
   if (cursors.left.isDown) {
     player.setVelocityX(-160);
 
