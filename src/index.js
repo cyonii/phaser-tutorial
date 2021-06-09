@@ -28,6 +28,14 @@ function create() {
 
   this.physics.add.collider(player, platforms);
 
+  const score = 0;
+  let scoreText;
+
+  scoreText = this.add.text(16, 16, 'score: 0', {
+    fontSize: '32px',
+    fill: '#000',
+  });
+
   const stars = this.physics.add.group({
     key: 'star',
     repeat: 11,
@@ -42,6 +50,9 @@ function create() {
 
   function collectStar(player, star) {
     star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
   }
 
   this.physics.add.overlap(player, stars, collectStar, null, this);
